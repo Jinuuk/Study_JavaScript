@@ -19,6 +19,7 @@ function Student(name,age){
   }
 }
 
+//상속
 var 학생1 = new Student('Lee',15);
 var 학생2 = new Student('Park',16);
 
