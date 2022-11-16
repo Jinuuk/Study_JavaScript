@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+
+<script type="module">
+
+  // import 변수 from '/module.js'
+  // console.log(변수);
+
+  // import {b} from '/module.js'
+  // console.log(b);
+
+  // import 변수,{a,b} from '/module.js'
+
+  // import {a as 별명} from '/module.js'
+  // console.log(a); //출력X
+  // console.log(별명);
+
+  import c, * as 별명 from '/module.js';
+  console.log(별명.a);
+  console.log(c);
+
+</script>
+
+</html>
