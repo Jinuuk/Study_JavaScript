@@ -27,13 +27,12 @@
 }
 
 .modal-btn {
-  background-color: #eee;
+  background-color: red;
+  color:white;
   border:none;
   border-radius: 5px;
-  padding :5px;
+  padding :5px 10px;
   display: block;
-  margin-left:auto;
-  margin-right: auto;
   margin-top : 15px;
 }
 
@@ -45,4 +44,9 @@
 
 .show-list {
   height: 200px;
+}
+
+.main-bg {
+  padding : 100px 20px;
+  background-color: #eee;
 }

@@ -12,7 +12,16 @@
   <div class="black-bg">
     <div class="white-bg">
       <h4>로그인하세요</h4>
-      <button class="btn btn-danger" id="close">닫기</button>
+      <form action="success.html">
+        <div class="my-3">
+          <input type="text" class="form-control" id="idForm">
+         </div>
+         <div class="my-3">
+           <input type="password" class="form-control" id="passwordForm">
+         </div>
+         <button type="submit" class="btn btn-primary" id="submit">전송</button>
+         <button type="button" class="btn btn-danger" id="close">닫기</button>
+      </form> 
     </div>
   </div> 
   <nav class="navbar navbar-light bg-light">
@@ -31,7 +40,10 @@
     <li class="list-group-item">And a fifth one</li>
   </ul>
 
-  <button class="modal-btn">로그인</button>
+  <div class="main-bg">
+    <h4>Shirts on Sale</h4>
+    <button class="modal-btn" id="login">로그인</button>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
   <script
@@ -40,18 +52,35 @@
   crossorigin="anonymous"></script>
 
   <script>
-
     $('.modal-btn').on('click',function(){
       $('.black-bg').addClass('show-modal');
     })
-
     $('#close').on('click',function(){
       $('.black-bg').removeClass('show-modal');
     })
-
     $('.navbar-toggler').on('click',function(){
       $('.list-group').toggleClass('show-list');
     })
+
+    //$('form').on('submit',function(){})
+    $('#submit').on('click',function(e){
+      if($('#idForm').val().trim() == ''){
+        alert('아이디를 입력하세요');
+        e.preventDefault();
+      }
+      if($('#passwordForm').val().trim() == ''){
+        alert('비밀번호를 입력하세요');
+        e.preventDefault();
+      } else if ($('#passwordForm').val().trim().length < 6){
+        alert('비밀번호는 6자리 이상 입력해야합니다.');
+        e.preventDefault();
+      }
+    })
+    //<input>에서 일어나는 input 이벤트 : input, change 
+
+
+
+
   
   </script>
 </body>
