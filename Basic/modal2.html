@@ -27,6 +27,7 @@
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
       <span class="navbar-brand">Navbar</span>
+      <span class="badge bg-dark">Dark 🔄</span>
       <button class="navbar-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -78,6 +79,18 @@
     })
     //<input>에서 일어나는 input 이벤트 : input, change 
 
+    //다크 모드
+    var cnt = 0;
+
+    $('.badge').on('click',function(){
+      cnt++;
+      console.log(cnt);
+      if(cnt%2 == 0){
+        $('.badge').html('Light 🔄');
+      } else {
+        $('.badge').html('Dark 🔄');
+      }
+    })
 
 
 
