@@ -1,4 +1,26 @@
 @charset "UTF-8";
+/* Bootstrap 스크롤 이동 설정 초기화 */
+:root {
+  scroll-behavior: auto;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index:5;
+  padding:0;
+}
+
+.navbar .navbar-brand {
+  font-size : 30px;
+  transition: all 1s;
+}
+
+.navbar .percent {
+  width: 0%;
+  height: 2px;
+  background-color: black;
+}
 
 .black-bg {
   width : 100%;
@@ -63,4 +85,13 @@
 
 .slide-box img {
   width: 100%;
+}
+
+.lorem {
+  margin-top : 25px; 
+  margin-left : auto;
+  margin-right: auto;
+  width:200px; 
+  height: 100px; 
+  overflow-y: scroll;
 }

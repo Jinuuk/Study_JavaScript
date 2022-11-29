@@ -32,6 +32,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
+    <div class="percent"></div>
   </nav>
   <ul class="list-group">
     <li class="list-group-item">An item</li>
@@ -67,6 +68,11 @@
 <button class="slide-3">3</button>  
 <button class="slide-next">다음</button>
 
+<div class="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae suscipit eaque, nobis aliquid excepturi ullam doloribus nihil officiis enim. Incidunt quae cupiditate totam vero quia cumque nihil accusantium blanditiis sequi!
+  Totam possimus, qui nobis consectetur quam facere? Nihil voluptates suscipit tempora laudantium sint numquam sequi natus nemo repudiandae labore, accusantium aliquid cupiditate architecto, nulla quod at quisquam, explicabo iusto corrupti?</div>
+
+<div style="height : 1500px"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
   <script
   src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -74,6 +80,7 @@
   crossorigin="anonymous"></script>
 
   <script>
+    //모달창
     $('.modal-btn').on('click',function(){
       $('.black-bg').addClass('show-modal');
     })
@@ -84,6 +91,7 @@
       $('.list-group').toggleClass('show-list');
     })
 
+    //유효성 검사 + 정규식
     //$('form').on('submit',function(){})
     $('#submit').on('click',function(e){
       let inputId = $('#idForm').val().trim();
@@ -110,7 +118,7 @@
     })
     //<input>에서 일어나는 input 이벤트 : input, change 
 
-    //다크 모드
+    //글자 변경 (다크모드)
     var cnt = 0;
     $('.badge').on('click',function(){
       cnt++;
@@ -163,8 +171,88 @@
       }
     })
 
+    //스크롤 이벤트
+    window.addEventListener('scroll',function(){
+       //스크롤바를 Y축으로 이동한 양
+      window.scrollY
+      // window.pageYOffset <--위와 같은 의미 (호환성 더 높음)
 
+      //스크롤바를 X축으로 이동한 양
+      // window.scrollX
+
+      // 좌표로 스크롤 이동 : Bootstrap 설치 시 스크롤을 스무스하게 처리해줌
+      // window.scrollTo(x,y)
+
+      // 현재 위치에서 좌표만큼 스크롤 이동
+      // window.scrollBy(0,100);
+    })
+
+    // JQuery
+    $(window).on('scroll',function(){
+      // 현재 스크롤바 위치 출력
+      // $(window).scrollTop();
+
+      //스크롤 이동
+      // $(window).scrollTop(100);
+    })
+
+    $('.lorem').on('scroll',function(){
+      //<div> 내에서 스크롤바를 Y축으로 이동한 양
+      document.querySelector('.lorem').scrollTop;
+
+      //<div> 실제 높이
+      document.querySelector('.lorem').scrollHeight;
+
+      //눈에 보이는 <div> 높이
+      document.querySelector('.lorem').clientHeight;
+    })
+
+    //스크롤 이벤트 연습
+    //1.스크롤바 100px 내리면 로고 폰트 사이즈 작게 만들기
+    window.addEventListener('scroll',function(){
+      if(window.scrollY >= 100){
+        document.querySelector('.navbar-brand').style.fontSize = '18px';
+      } else {
+        document.querySelector('.navbar-brand').style.fontSize = '30px';
+      }
+    })
+
+
+    //2.회원약관 박스를 거의 끝까지 스크롤하면 alert 발생
+    let showAlert = false;
+    document.querySelector('.lorem').addEventListener('scroll',function(){
+      let st =  document.querySelector('.lorem').scrollTop;
+      let ch = document.querySelector('.lorem').clientHeight;
+      let sh = document.querySelector('.lorem').scrollHeight;
+
+      if(st+ch >= sh-5 && showAlert == false){
+        showAlert = true;
+        alert('다 읽었습니다.');
+      } else if (st + ch < sh-5){
+        showAlert = false;
+      }
+    })
+
+    //현재 페이지 끝까지 스크롤 했는지 체크
+    // document.querySelector('html').scrollTop;
+    window.scrollY;
+
+    document.querySelector('html').clientHeight;
     
+    //페이지 로드 완료시 실행해야 정확 -> <body>끝나기 전에 넣기
+    document.querySelector('html').scrollHeight;
+    // document.documentElement.scrollHeight;
+
+    //3.읽은 양 확인
+    window.addEventListener('scroll',function(){
+      let st = window.scrollY;
+      let ch = document.querySelector('html').clientHeight;
+      let sh = document.querySelector('html').scrollHeight;
+
+      console.log(st,ch,sh);
+
+      document.querySelector('.percent').style.width = `${st/(sh-ch) * 100}%`;
+    })
 
 
   
