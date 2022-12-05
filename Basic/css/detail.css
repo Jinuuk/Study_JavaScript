@@ -36,6 +36,10 @@ ul.list::after {
   display: block;
 }
 
-.product-size {
+/* .product-size {
+  visibility: hidden;
+} */
+
+.form-hide {
   visibility: hidden;
 }

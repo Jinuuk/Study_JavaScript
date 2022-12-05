@@ -24,16 +24,16 @@
       <option>셔츠</option>
       <option>바지</option>
     </select>
-    <select class="form-select mt-2 product-size">
+    <select class="form-select mt-2 product-size form-hide">
       <option>95</option>
       <option>100</option>
       <option>105</option>
     </select>
   </form>
 
-  <div id="test">
+  <!-- <div id="test">
     <h4>반가워</h4>
-  </div>
+  </div> -->
 
   <div class="container mt-5">
     <ul class="list">
@@ -141,26 +141,26 @@
       document.getElementById('productPrice').innerHTML = car2.price[0];
 
       //select input
-      let $productName = document.querySelector('.product-name');
-      let $productSize = document.querySelector('.product-size');
+      // let $productName = document.querySelector('.product-name');
+      // let $productSize = document.querySelector('.product-size');
 
-      $productName.addEventListener('input',function(){
-        if(this.value == '셔츠'){
-          $productSize.style.visibility = 'visible';
-          $productSize.innerHTML = 
-            `<option>95</option>
-              <option>100</option>
-              <option>105</option>`;
-        } else if(this.value == '바지') {
-          $productSize.style.visibility = 'visible';
-          $productSize.innerHTML = 
-            `<option>28</option>
-              <option>30</option>
-              <option>32</option>`;
-            } else {
-          $productSize.style.visibility = 'hidden';
-        }
-      })
+      // $productName.addEventListener('input',function(){
+      //   if(this.value == '셔츠'){
+      //     $productSize.style.visibility = 'visible';
+      //     $productSize.innerHTML = 
+      //       `<option>95</option>
+      //         <option>100</option>
+      //         <option>105</option>`;
+      //   } else if(this.value == '바지') {
+      //     $productSize.style.visibility = 'visible';
+      //     $productSize.innerHTML = 
+      //       `<option>28</option>
+      //         <option>30</option>
+      //         <option>32</option>`;
+      //       } else {
+      //     $productSize.style.visibility = 'hidden';
+      //   }
+      // })
 
       //html 생성
       //방법1
@@ -170,10 +170,41 @@
       // document.getElementById('test').appendChild(createdTag);
 
       //방법2
-      var template = '<p class="new">안녕</p>';
-      document.getElementById('test').insertAdjacentHTML('beforeend',template);
+      // var template = '<p class="new">안녕</p>';
+      // document.getElementById('test').insertAdjacentHTML('beforeend',template);
       //JQuery
       // $('#test').append(template);
+
+      //forEach
+      var shirts = [95,100,105];
+      var pants = [28,30,32,34];
+
+      $('.form-select').eq(0).on('input',function(){
+
+        var value = $('.form-select').eq(0).val();
+        if(value == '셔츠'){
+          $('.form-select').eq(1).removeClass('form-hide');
+          $('.form-select').eq(1).html('');
+          shirts.forEach(data=>{
+            $('.form-select').eq(1).append(`<option>${data}</option>`);
+          })
+        } else if (value == '바지'){
+          $('.form-select').eq(1).removeClass('form-hide');
+          $('.form-select').eq(1).html('');
+          pants.forEach(data=>{
+            $('.form-select').eq(1).append(`<option>${data}</option>`);
+          })
+        }
+      })
+
+      //for in
+      var obj = {name : 'kim', age : 20}
+      for(var key in obj){
+        console.log(key);
+        console.log(obj[key]);
+      }
+
+      
 
       </script>
 </body>
