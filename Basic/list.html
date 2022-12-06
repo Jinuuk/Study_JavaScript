@@ -18,7 +18,14 @@
           <p>가격 : 70000</p>
         </div> -->
     </div>
+    <button class="btn btn-danger firstStateBtn">원상태</button>
     <button class="btn btn-danger showMoreBtn">더보기</button>
+    <button class="btn btn-danger sortByPriceBtn">가격 정렬</button>
+    <button class="btn btn-danger sortByTitleBtn">상품명 정렬</button>
+    <div></div>
+    <label for="">가격 정렬 기준</label><input class="mt-3 ms-2 priceStandard" type="text">
+    <button class="btn btn-danger filterBtn">n만원 이하 상품보기</button>
+    
   </div> 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -32,6 +39,8 @@
       { id : 1, price : 50000, title : 'Springfield Shirt' },
       { id : 2, price : 60000, title : 'Black Monastery' },
     ];
+
+    var copiedProducts = [...products];
 
     // for (ele of products){
     //   document.querySelectorAll('.title')[ele.id].innerHTML = ele.title;
@@ -56,7 +65,6 @@
     
 
     products.forEach(data=>{
-      // console.log(data);
       showMoreProduct(data);
     })
     
@@ -80,13 +88,112 @@
       $('.card-box').eq(0).append(`
       <div class="col-sm-4">
           <img src="https://via.placeholder.com/600" class="w-100">
-          <h5>${data.title}</h5>
+          <h5 class="productTitle">${data.title}</h5>
           <p>가격 : ${data.price}</p>
+          <button class="buyBtn">구매</button>
         </div>
       `);
     }
 
+    //Local Storage
+    //key와 value에 문자나 숫자 저장 가능
+    localStorage.setItem('이름','김진욱');
+    localStorage.getItem('이름');
+    localStorage.removeItem('이름');
 
+    //array,object 자료형 저장 방법
+    //문자로 강제 변환됨
+    localStorage.setItem('arr',[1,2,3]);
+
+    //array/object -> JSON
+    var arr2 = [1,2,3];
+    var newArr2 = JSON.stringify(arr2);
+    localStorage.setItem('arr2',newArr2);
+
+    var gotNewArr2 = localStorage.getItem('arr2');
+    //문자 형태로 추출 됨
+    console.log(gotNewArr2);
+
+    //JSON -> array/object
+    console.log(JSON.parse(gotNewArr2));
+
+    //장바구니
+    
+    /*
+    document.querySelector('.card-box').addEventListener('click',function(e){
+      if(e.target.tagName == 'BUTTON'){
+        let selectedProduct = e.target.previousElementSibling.previousElementSibling.innerText;
+        // let selectedProduct = $(e.target).siblings('.productTitle').text();
+        
+        if(localStorage.getItem('cart') == null){
+          // let cart = [];
+          // cart.push(selectedProduct);
+          // cart = JSON.stringify(cart);
+          localStorage.setItem('cart',JSON.stringify([selectedProduct]));
+        } else {
+          let cart = JSON.parse(localStorage.getItem('cart'));
+          cart.push(selectedProduct);
+          cart = [...new Set(cart)];
+          cart = JSON.stringify(cart);
+          localStorage.setItem('cart',cart);
+        }
+      }
+    })
+    */
+    
+    $('.buyBtn').click(function(e){
+        let selectedProduct = $(e.target).siblings('.productTitle').text();
+
+        if(localStorage.getItem('cart') == null){
+          localStorage.setItem('cart',JSON.stringify([selectedProduct]));
+        } else {
+          let cart = JSON.parse(localStorage.getItem('cart'));
+          cart.push(selectedProduct);
+          cart = [...new Set(cart)];
+          cart = JSON.stringify(cart);
+          localStorage.setItem('cart',cart);
+        }
+    });
+
+
+    //상품명 역순 정렬
+    $('.sortByTitleBtn').on('click',function(){
+      products.sort(function(a,b){
+        if(a.title > b.title){
+          return -1;
+        } else if (a.title < b.title){
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      $('.card-box').html('');
+        products.forEach(data=>{
+        showMoreProduct(data);
+      });
+    });
+
+    //n만원 이하 상품보기
+    $('.filterBtn').on('click',function(){
+      console.log('클릭!');
+      let priceStandard = $('.priceStandard').val();
+      let filteredProduct = products.filter(function(ele){
+        return ele.price <= priceStandard;
+      });
+      $('.card-box').html('');
+      filteredProduct.forEach(data=>{
+        showMoreProduct(data);
+      });
+    })
+
+    //원상태
+    $('.firstStateBtn').on('click',function(){
+      $('.card-box').html('');
+      copiedProducts.forEach(data=>{
+        showMoreProduct(data);
+      });
+    })
+    
   </script> 
 </body>
 </html>
